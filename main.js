@@ -44,17 +44,11 @@ $(function(){
 	
 	var timer = setInterval(function () {
 		world.step(0.1);
-	}, 13);
+	}, 1000/60);
 
 	$('.object.editable').click(function() {
-		var object = $(this).data('object'), 
-			data = {
-			center: object.center,
-			size: object.size,
-			createContact: (function() {
-				alert(1);
-			}) + ""
-		};
+		var object = $(this).data('object');
+		console.log(object);
 		$('#code')
 			.val("\
 {\n\
@@ -68,6 +62,8 @@ $(function(){
   x: "+object.size.x+",\n\
   y: "+object.size.y+"\n\
  },\n\
+ // 常に実行される関数です\n\
+ beforeStep: "+object.beforeStep+",\n\
  // ゆるみんとぶつかったときに実行される関数です\n\
  createContact: "+object.createContact+"\n\
 }")
@@ -79,6 +75,7 @@ $(function(){
 		
 		object.center = data.center;
 		object.size = data.size;
+		object.beforeStep = data.beforeStep;
 		object.createContact = data.createContact;
 	});
 });
