@@ -16,7 +16,7 @@
 	width: 64px;
 	height: 32px;
 }
-.object.editable:hover {
+.object.editable:hover, .object.editable.checked {
 	border: 1px solid red !important;
 }
 

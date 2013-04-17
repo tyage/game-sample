@@ -48,7 +48,10 @@ $(function(){
 
 	$('.object.editable').click(function() {
 		var object = $(this).data('object');
-		console.log(object);
+		
+		$('.checked').removeClass('checked');
+		$(this).addClass('checked');
+		
 		$('#code')
 			.val("\
 {\n\
