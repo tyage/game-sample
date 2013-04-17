@@ -67,7 +67,7 @@ $(function(){
  },\n\
  // 常に実行される関数です\n\
  beforeStep: "+object.beforeStep+",\n\
- // ゆるみんとぶつかったときに実行される関数です\n\
+ // ゆるミンとぶつかったときに実行される関数です\n\
  createContact: "+object.createContact+"\n\
 }")
 			.data('object', object);
