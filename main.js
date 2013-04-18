@@ -14,17 +14,6 @@ $(function(){
 			}
 		}
 	});
-	Boku2D.Model.enemy = $.extend(false, Boku2D.Model.block, {
-		randForce: new Boku2D.Vec(100, 0),
-		beforeStep: function(time) {
-			if (this.randForce) {
-				this.applyForce(this.randForce.multiply(Math.random()-0.5));
-			}
-			if (this.randJump && Math.random() < 0.1 && this.canJump()) {
-				this.applyForce(this.randJump);
-			}
-		}
-	});
 	
 	var world = new Boku2D.World();
 	world.initDOM($('#world').get(0));
@@ -65,6 +54,14 @@ $(function(){
   x: "+object.size.x+",\n\
   y: "+object.size.y+"\n\
  },\n\
+ // 質量です\n\
+ weight: "+object.weight+",\n\
+ // 反発係数です\n\
+ elastic: "+object.elastic+",\n\
+ // 粘性係数です\n\
+ viscosity: "+object.viscosity+",\n\
+ // 摩擦係数です\n\
+ friction: "+object.friction+",\n\
  // 常に実行される関数です\n\
  beforeStep: "+object.beforeStep+",\n\
  // ゆるミンとぶつかったときに実行される関数です\n\
@@ -76,9 +73,8 @@ $(function(){
 		var object = $(this).data('object'),
 			data = (new Function("return "+$(this).val()))();
 		
-		object.center = data.center;
-		object.size = data.size;
-		object.beforeStep = data.beforeStep;
-		object.createContact = data.createContact;
+		for (key in data) {
+			object[key] = data[key];
+		}
 	});
 });
